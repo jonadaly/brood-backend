@@ -1,0 +1,128 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Brood API
+  license:
+    name: Apache 2.0
+paths:
+  /snapshot:
+    post:
+      summary: Create snapshot
+      operationId: brood_backend.controller.create_snapshot
+      requestBody:
+        description: Snapshot to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SnapshotNew'
+      responses:
+        '200':
+          description: Snapshot response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Snapshot'
+        default:
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /brood:
+    get:
+      summary: Get brood
+      operationId: brood_backend.controller.get_brood
+      responses:
+        '200':
+          description: Brood response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Chicken'
+        default:
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          example: 404
+        message:
+          type: string
+          example: "entity not found"
+
+    Snapshot:
+      allOf:
+        - $ref: '#/components/schemas/SnapshotNew'
+        - required:
+          - uuid
+          - created
+          properties:
+            uuid:
+              type: string
+              example: "17c443ec-b27a-453d-a1db-f8e98886fa32"
+            created:
+              type: string
+              example: "2018-01-01T00:00:00.000Z"
+
+    SnapshotNew:
+      required:
+        - chicken_uuid
+        - latitude
+        - longitude
+        - status
+      properties:
+        chicken_uuid:
+          type: string
+          example: "84a9129c-e215-440b-afc0-0007c032f080"
+        latitude:
+          type: number
+          format: double
+          example: 51.4769
+        longitude:
+          type: number
+          format: double
+          example: 0.0005
+        status:
+          type: string
+          example: "😊"
+
+    Chicken:
+      required:
+        - uuid
+        - name
+        - status
+        - temperature
+        - openweather_icon_id
+      properties:
+        uuid:
+          type: string
+          example: "d3d2b214-191a-46e0-8583-ccc7af40ac41"
+        name:
+          type: string
+          example: "Cluckers"
+        status:
+          type: string
+          example: "😊"
+        temperature:
+          type: number
+          format: int32
+          example: 21
+        openweather_icon_id:
+          type: string
+          example: "01d"
