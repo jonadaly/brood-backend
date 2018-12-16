@@ -8,7 +8,7 @@ paths:
   /peck:
     post:
       summary: Create peck
-      operationId: brood_backend.controller.create_peck
+      operationId: brood_backend.api.create_peck
       requestBody:
         description: Peck to create
         required: true
@@ -33,7 +33,7 @@ paths:
   /brood:
     get:
       summary: Get brood
-      operationId: brood_backend.controller.get_brood
+      operationId: brood_backend.api.get_brood
       responses:
         '200':
           description: Brood response
