@@ -21,5 +21,5 @@ class Peck(db.Model):
             "created": self.created,
             "latitude": self.latitude,
             "longitude": self.longitude,
-            "chicken": "TODO"
+            "chicken": "TODO",
         }
