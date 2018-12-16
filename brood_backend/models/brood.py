@@ -11,7 +11,7 @@ class Brood(db.Model):
     )
     name = db.Column(db.String(), unique=False, nullable=False)
     hashed_password = db.Column(db.String(), unique=False, nullable=False)
-    # pecks = db.relationship("Peck", backref="chicken", uselist=True)
+    chickens = db.relationship("Chicken", back_populates="brood")
 
     def to_dict(self) -> dict:
         return {"uuid": self.uuid, "created": self.created}

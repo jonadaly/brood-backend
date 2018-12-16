@@ -10,7 +10,9 @@ class Chicken(db.Model):
         db.DateTime, unique=False, nullable=False, default=datetime.utcnow
     )
     name = db.Column(db.String(), unique=False, nullable=False)
-    # pecks = db.relationship("Peck", backref="chicken", uselist=True)
+    pecks = db.relationship("Peck", back_populates="chicken")
+    brood_uuid = db.Column(db.String, db.ForeignKey("brood.uuid"), nullable=False)
+    brood = db.relationship("Brood", back_populates="chickens")
 
     def to_dict(self) -> dict:
         return {"uuid": self.uuid, "created": self.created, "name": self.name}

@@ -14,6 +14,7 @@ VERSION = "0.0.1"
 # http://pypi.python.org/pypi/setuptools
 
 REQUIRES = [
+    "flask",
     "connexion",
     "waitress",
     "Flask-SQLAlchemy",

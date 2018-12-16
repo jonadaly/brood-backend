@@ -1,9 +1,11 @@
 import connexion
-from brood_backend.database import db
+from brood_backend.database import db, init_database
 
 from brood_backend.config import init_config
 from flask_migrate import Migrate
 from loguru import logger
+
+from brood_backend.errors import init_error_handler
 
 
 def create_app(testing=False):
@@ -12,19 +14,11 @@ def create_app(testing=False):
     connexion_app.add_api(
         "swagger.yaml", strict_validation=True, arguments={"title": "API for Brood"}
     )
-
     app = connexion_app.app
 
     init_config(app)
-
-    db.init_app(app)
-    Migrate(app, db)
-
-    # Create database if in-memory
-    if testing:
-        with app.app_context():
-            db.create_all()
+    init_error_handler(app)
+    init_database(app)
 
     logger.info("App ready to serve requests")
-
     return app
