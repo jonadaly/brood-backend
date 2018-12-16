@@ -13,7 +13,15 @@ VERSION = "0.0.1"
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 
-REQUIRES = ["connexion", "waitress"]
+REQUIRES = [
+    "connexion",
+    "waitress",
+    "Flask-SQLAlchemy",
+    "loguru",
+    "psycopg2-binary",
+    "Flask-Migrate",
+    "Flask-Env",
+]
 
 setup(
     name=NAME,
@@ -21,12 +29,12 @@ setup(
     description="Python backend for Brood",
     author_email="jondaly01@gmail.com",
     url="https://jondalybrood.com",
-    keywords=["Swagger", "API", ],
+    keywords=["Swagger", "API"],
     install_requires=REQUIRES,
     packages=find_packages(),
-    package_data={'': ['swagger.yaml']},
+    package_data={"": ["swagger.yaml"]},
     include_package_data=True,
     long_description="""\
     Python backend for Brood
-    """
+    """,
 )

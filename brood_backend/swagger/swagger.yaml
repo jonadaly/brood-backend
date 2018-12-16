@@ -5,24 +5,24 @@ info:
   license:
     name: Apache 2.0
 paths:
-  /snapshot:
+  /peck:
     post:
-      summary: Create snapshot
-      operationId: brood_backend.controller.create_snapshot
+      summary: Create peck
+      operationId: brood_backend.controller.create_peck
       requestBody:
-        description: Snapshot to create
+        description: Peck to create
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SnapshotNew'
+              $ref: '#/components/schemas/PeckNew'
       responses:
         '200':
-          description: Snapshot response
+          description: Peck response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Snapshot'
+                $ref: '#/components/schemas/Peck'
         default:
           description: error
           content:
@@ -66,9 +66,9 @@ components:
           type: string
           example: "entity not found"
 
-    Snapshot:
+    Peck:
       allOf:
-        - $ref: '#/components/schemas/SnapshotNew'
+        - $ref: '#/components/schemas/PeckNew'
         - required:
           - uuid
           - created
@@ -80,7 +80,7 @@ components:
               type: string
               example: "2018-01-01T00:00:00.000Z"
 
-    SnapshotNew:
+    PeckNew:
       required:
         - chicken_uuid
         - latitude
