@@ -4,7 +4,7 @@ from loguru import logger
 
 from brood_backend.database import db
 from brood_backend.models.brood import Brood
-from brood_backend.security import hash_password
+from brood_backend.helpers.security import hash_password
 
 
 def create_brood(data: dict) -> dict:

@@ -1,11 +1,10 @@
 import connexion
-from brood_backend.database import db, init_database
+from brood_backend.database import init_database
 
 from brood_backend.config import init_config
-from flask_migrate import Migrate
 from loguru import logger
 
-from brood_backend.errors import init_error_handler
+from brood_backend.helpers.errors import init_error_handler
 
 
 def create_app(testing=False):

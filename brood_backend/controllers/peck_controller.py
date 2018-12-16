@@ -3,7 +3,7 @@ from uuid import uuid4
 from loguru import logger
 
 from brood_backend.database import db
-from brood_backend.errors import EntityNotFoundException
+from brood_backend.helpers.errors import EntityNotFoundException
 from brood_backend.models.chicken import Chicken
 from brood_backend.models.peck import Peck
 
