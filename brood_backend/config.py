@@ -11,9 +11,7 @@ def init_config(app):
 
     app.config.from_object(Configuration)
 
-    database_vars = [
-        "DATABASE_URL",
-    ]
+    database_vars = ["DATABASE_URL"]
 
     missing = [d for d in database_vars if app.config[d] is None]
     if missing:
@@ -21,6 +19,4 @@ def init_config(app):
             f"Error starting, missing env vars: {', '.join(missing)}."
         )
 
-    app.config[
-        "SQLALCHEMY_DATABASE_URI"
-    ] = app.config["DATABASE_URL"]
+    app.config["SQLALCHEMY_DATABASE_URI"] = app.config["DATABASE_URL"]
