@@ -1,1 +1,2 @@
-web: gunicorn gettingstarted.wsgi --log-file -
+web: python -m brood-backend
+release: flask db upgrade
