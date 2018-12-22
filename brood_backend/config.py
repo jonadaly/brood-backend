@@ -12,11 +12,7 @@ def init_config(app):
     app.config.from_object(Configuration)
 
     database_vars = [
-        "DATABASE_USER",
-        "DATABASE_PASSWORD",
-        "DATABASE_HOST",
-        "DATABASE_PORT",
-        "DATABASE_NAME",
+        "DATABASE_URL",
     ]
 
     missing = [d for d in database_vars if app.config[d] is None]
