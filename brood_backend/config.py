@@ -3,7 +3,7 @@ from flask_env import MetaFlaskEnv
 
 class Configuration(metaclass=MetaFlaskEnv):
 
-    DATABASE_URL: None
+    DATABASE_URL = None
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
