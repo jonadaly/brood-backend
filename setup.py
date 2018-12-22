@@ -22,6 +22,7 @@ REQUIRES = [
     "psycopg2-binary",
     "Flask-Migrate",
     "Flask-Env",
+    "requests",
 ]
 
 setup(

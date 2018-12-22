@@ -11,6 +11,7 @@ def init_error_handler(app):
     app.errorhandler(TypeError)(_catch_bad_request)
     app.errorhandler(PermissionError)(_catch_unauthorised)
     app.errorhandler(EntityNotFoundException)(_catch_not_found)
+    app.errorhandler(ServiceUnavailableException)(_catch_upstream)
 
 
 def _catch_bad_request(error):
@@ -29,6 +30,10 @@ def _catch_unauthorised(_error):
     return _catch("Forbidden", logger.error, 403)
 
 
+def _catch_upstream(error):
+    return _catch(error, logger.error, 502)
+
+
 def _catch(error, log_method, code):
     exc_type, exc_value, exc_traceback = sys.exc_info()
     log_method("".join(traceback.format_exception(exc_type, exc_value, exc_traceback)))
@@ -37,4 +42,8 @@ def _catch(error, log_method, code):
 
 
 class EntityNotFoundException(Exception):
+    pass
+
+
+class ServiceUnavailableException(Exception):
     pass

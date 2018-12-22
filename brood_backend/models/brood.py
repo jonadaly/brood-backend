@@ -14,4 +14,9 @@ class Brood(db.Model):
     chickens = db.relationship("Chicken", back_populates="brood")
 
     def to_dict(self) -> dict:
-        return {"uuid": self.uuid, "created": self.created}
+        return {
+            "uuid": self.uuid,
+            "created": self.created,
+            "name": self.name,
+            "chickens": [c.to_dict() for c in self.chickens],
+        }

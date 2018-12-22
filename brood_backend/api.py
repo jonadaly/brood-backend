@@ -8,8 +8,8 @@ from brood_backend.controllers import (
 )
 
 
-def get_brood():
-    return "Not implemented", 501
+def get_brood_by_id(brood_id: str):
+    return jsonify(brood_controller.get_brood_by_uuid(brood_id))
 
 
 def create_peck():

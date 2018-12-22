@@ -4,8 +4,9 @@ info:
   title: Brood API
   license:
     name: Apache 2.0
+
 paths:
-  /peck:
+  /v1/peck:
     post:
       summary: Create peck
       operationId: brood_backend.api.create_peck
@@ -30,19 +31,75 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /brood:
-    get:
-      summary: Get brood
-      operationId: brood_backend.api.get_brood
+  /v1/brood:
+    post:
+      summary: Create brood
+      operationId: brood_backend.api.create_brood
+      requestBody:
+        description: Brood to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BroodNew'
       responses:
         '200':
           description: Brood response
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Chicken'
+                $ref: '#/components/schemas/Brood'
+        default:
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /v1/brood/{brood_id}:
+    get:
+      summary: Get brood by ID
+      operationId: brood_backend.api.get_brood_by_id
+      parameters:
+        - name: brood_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: 'Brood id'
+          x-example: '84a9129c-e215-440b-afc0-0007c032f080'
+      responses:
+        '200':
+          description: Brood response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Brood'
+        default:
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /v1/chicken:
+    post:
+      summary: Create chicken
+      operationId: brood_backend.api.create_chicken
+      requestBody:
+        description: Chicken to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChickenNew'
+      responses:
+        '200':
+          description: Chicken response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Chicken'
         default:
           description: error
           content:
@@ -102,27 +159,78 @@ components:
           type: string
           example: "😊"
 
-    Chicken:
+    ChickenNew:
       required:
-        - uuid
+        - brood_uuid
         - name
-        - status
-        - temperature
-        - openweather_icon_id
       properties:
-        uuid:
+        brood_uuid:
           type: string
           example: "d3d2b214-191a-46e0-8583-ccc7af40ac41"
         name:
           type: string
           example: "Cluckers"
-        status:
+
+    Chicken:
+      allOf:
+        - $ref: '#/components/schemas/ChickenNew'
+        - required:
+          - uuid
+          - created
+          - name
+          - status
+          - temperature
+          - openweather_icon_id
+          properties:
+            uuid:
+              type: string
+              example: "d3d2b214-191a-46e0-8583-ccc7af40ac41"
+            created:
+              type: string
+              example: "2018-01-01T00:00:00.000Z"
+            name:
+              type: string
+              example: "Cluckers"
+            status:
+              type: string
+              example: "😊"
+            temperature:
+              type: number
+              format: int32
+              example: 21
+            openweather_icon_id:
+              type: string
+              example: "01d"
+
+    BroodNew:
+      required:
+        - name
+        - pass_code
+      properties:
+        name:
           type: string
-          example: "😊"
-        temperature:
-          type: number
-          format: int32
-          example: 21
-        openweather_icon_id:
+          example: "some brood"
+        pass_code:
           type: string
-          example: "01d"
+          example: "password123"
+
+    Brood:
+      required:
+        - uuid
+        - created
+        - name
+        - chickens
+      properties:
+        uuid:
+          type: string
+          example: "d3d2b214-191a-46e0-8583-ccc7af40ac41"
+        created:
+          type: string
+          example: "2018-01-01T00:00:00.000Z"
+        name:
+          type: string
+          example: "Cluckers"
+        chickens:
+          type: array
+          items:
+            $ref: '#/components/schemas/Chicken'
