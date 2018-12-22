@@ -7,3 +7,4 @@ waitress==1.1.0
 loguru==0.2.1
 psycopg2-binary==2.7.6.1
 requests==2.20.1
+swagger-ui-bundle==0.0.2
