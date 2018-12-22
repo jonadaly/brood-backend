@@ -3,11 +3,7 @@ from flask_env import MetaFlaskEnv
 
 class Configuration(metaclass=MetaFlaskEnv):
 
-    DATABASE_USER = None
-    DATABASE_PASSWORD = None
-    DATABASE_HOST = None
-    DATABASE_PORT = None
-    DATABASE_NAME = None
+    DATABASE_URL: None
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
@@ -31,6 +27,4 @@ def init_config(app):
 
     app.config[
         "SQLALCHEMY_DATABASE_URI"
-    ] = "postgresql+psycopg2://{}:{}@{}:{}/{}".format(
-        *[app.config[database_var] for database_var in database_vars]
-    )
+    ] = app.config["DATABASE_URL"]
