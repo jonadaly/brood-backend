@@ -157,7 +157,7 @@ components:
           example: 0.0005
         status:
           type: string
-          example: "😊"
+          example: "!"
 
     ChickenNew:
       required:
@@ -193,7 +193,7 @@ components:
               example: "Cluckers"
             status:
               type: string
-              example: "😊"
+              example: "!"
             temperature:
               type: number
               format: int32
