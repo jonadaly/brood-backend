@@ -18,5 +18,5 @@ class Brood(db.Model):
             "uuid": self.uuid,
             "created": self.created,
             "name": self.name,
-            "chickens": [c.to_dict() for c in self.chickens],
+            "chickens": sorted([c.to_dict() for c in self.chickens], key=lambda x: x["created"]),
         }
