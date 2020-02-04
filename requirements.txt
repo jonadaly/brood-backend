@@ -3,7 +3,7 @@ Flask-Env==2.0.0
 Flask-Migrate==2.3.1
 Flask-SQLAlchemy==2.3.2
 connexion==2018.0.dev1
-waitress==1.4.2
+waitress==1.*
 loguru==0.2.1
 psycopg2-binary==2.7.6.1
 requests==2.20.1
